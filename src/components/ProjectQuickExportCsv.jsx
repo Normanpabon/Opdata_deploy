@@ -2,6 +2,7 @@ import { ExportToCsv } from 'export-to-csv';
 import { useUser } from "../context/UserContext";
 function ProjectQuickExportCsv({ open }) {
     
+    
   
     
     {/**No se estan pasando actualmente a las opciones, definen las columnas del csv */}
@@ -15,22 +16,17 @@ function ProjectQuickExportCsv({ open }) {
     ];
 
     {/**Importar metodo para devolver los proyectos filtrados */}
-    const { returnShowedProjects } = useUser();
+    const { returnShowedProjects, user } = useUser();
 
-
-    {/**Borrar el test data cuando se recuperen los proyectos mostrados en el dash */}
-    
-    const testData = [
-        {fecha_reg: "11/20/2022", fecha_ini: "11/25/2022", fecha_end: "11/25/2022", desc_pro: "Proyecto prueba CSV", estado: "Activo", obs:"proyectoTest", unidad:"Unidad de software"},
-        {fecha_reg: "09/20/2022", fecha_ini: "10/25/2022", fecha_end: "11/25/2022", desc_pro: "Proyecto prueba CSV 2", estado: "En espera", obs:"proyectoTest 2", unidad:"Unidad de software"}
-    ];
 
     var dataObtainedFromContext = [{}];
 
+    
     {/**Opciones para export-to-csv */}
+    var fname= 'Reporte generado ' + user.nombre_unidad + ' ' + (new Date().toUTCString());
     const options = {
             fieldSeparator:',',
-            filename:'Reporte generado INSERTAR FECHA Y UNIDAD',
+            filename: fname,
             quoteStrings:'"',
             decimalSeparator:'.',
             showLabels:true,
